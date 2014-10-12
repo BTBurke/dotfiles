@@ -1,0 +1,116 @@
+!-------------------------------------------------------------------------------
+! Font settings
+!-------------------------------------------------------------------------------
+URxvt*font: xft:Ubuntu Mono:pixelsize=16,style=regular
+URxvt.allow_bold: true
+URxvt*letterSpace: -1
+
+!-------------------------------------------------------------------------------
+! Xft settings
+!-------------------------------------------------------------------------------
+ 
+Xft.dpi:                    96
+Xft.antialias:              false
+Xft.rgba:                   rgb
+Xft.hinting:                true
+Xft.hintstyle:              hintslight
+ 
+!-------------------------------------------------------------------------------
+! URxvt settings - common
+!-------------------------------------------------------------------------------
+ 
+URxvt.depth:                32
+URxvt.geometry:             90x30
+URxvt.transparent:          false
+URxvt.fading:               0
+! URxvt.urgentOnBell:         true
+! URxvt.visualBell:           true
+URxvt.loginShell:           true
+URxvt.saveLines:            100
+URxvt.internalBorder:       3
+URxvt.lineSpace:            0
+ 
+! Scrollbar
+URxvt.scrollStyle:          rxvt
+URxvt.scrollBar:            false
+ 
+! Perl extensions
+URxvt.perl-ext-common:      default,matcher
+URxvt.matcher.button:       1
+URxvt.urlLauncher:          firefox
+ 
+! Cursor
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          #657b83
+URxvt.cursorUnderline:      false
+ 
+! Pointer
+URxvt.pointerBlank:         true
+ 
+! --- ~/.Xresources ------------------------------------------------------------
+! ------------------------------------------------------------------------------
+! --- generated with 4bit Terminal Color Scheme Designer -----------------------
+! ------------------------------------------------------------------------------
+! --- http://ciembor.github.com/4bit -------------------------------------------
+! ------------------------------------------------------------------------------
+
+! --- special colors ---
+
+*background: #173a55
+*foreground: #d5ecf6
+
+! --- standard colors ---
+
+! black
+*color0: #0c0c0c
+
+! bright_black
+*color8: #3f3f3f
+
+! red
+*color1: #ac6f55
+
+! bright_red
+*color9: #c0a49a
+
+! green
+*color2: #3bb97c
+
+! bright_green
+*color10: #81cdb1
+
+! yellow
+*color3: #85b955
+
+! bright_yellow
+*color11: #aacd9a
+
+! blue
+*color4: #6248c5
+
+! bright_blue
+*color12: #978dd9
+
+! magenta
+*color5: #ac489e
+
+! bright_magenta
+*color13: #c08dc3
+
+! cyan
+*color6: #3b91c5
+
+! bright_cyan
+*color14: #81b6d9
+
+! white
+*color7: #bdbdbd
+
+! bright_white
+*color15: #ffffff
+
+
+! ------------------------------------------------------------------------------
+! --- end of terminal colors section -------------------------------------------
+! ------------------------------------------------------------------------------
+
