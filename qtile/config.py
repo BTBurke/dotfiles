@@ -1,3 +1,5 @@
+import subprocess
+import os
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 try:
@@ -222,22 +224,3 @@ def grouper(window, windows={'firefox': '1-web',
                except IndexError:
                     pass
 
-
-@hook.subscribe.startup
-def runner():
-     import subprocess
-
-     """
-     Run after qtile is started
-     """
-
-     # startup-script is simple a list of programs to run
-     #subprocess.Popen('startup-script')
-
-     # terminal programs behave weird with regards to window titles
-     # we open them separately and in a defined order so that the
-     # client_new hook has time to group them by the window title
-     # as the window title for them is the same when they open
-
-     #subprocess.Popen(['urxvt', '-e', 'ncmpcpp-opener'])
-     #subprocess.Popen(['urxvt', '-e', 'weechat-curses'])
