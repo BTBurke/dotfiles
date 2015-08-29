@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-export DEFAULT_HOST="turing"
+export DEFAULT_HOST="dude"
 export LSCOLORS="dxfxcxdxbxegedabagacad" #set dir color=yellow
 
 # Set name of the theme to load.
@@ -56,8 +56,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin"
-export GOPATH="/Users/btb/project/golang"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:/home/btb/project/golang/bin"
+export GOPATH="/home/btb/project/golang"
 
 
 # ssh
@@ -72,6 +72,17 @@ EOF
     done
 }
 
+function set-mtu() {
+  MTU=$(ip li | grep wlan0 | cut -d ' ' -f 5)
+
+  if [[ $MTU != "1200" ]]; then
+    print "Setting MTU to 1200..."
+    sudo li ip set mtu 1200 dev wlan0
+    print $(ip li | grep wlan0 | cut -d ' ' -f 5)
+  fi
+
+}
 if (( $+commands[ssh] )) && [[ -d ~/.ssh/config.d/ ]]; then
+  set-mtu
     compile-ssh-config
 fi
