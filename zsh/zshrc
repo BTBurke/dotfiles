@@ -86,3 +86,9 @@ if (( $+commands[ssh] )) && [[ -d ~/.ssh/config.d/ ]]; then
   set-mtu
     compile-ssh-config
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/home/btb/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables shell command completion for gcloud.
+source '/home/btb/google-cloud-sdk/completion.zsh.inc'
