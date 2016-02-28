@@ -56,8 +56,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:~/project/golang/bin"
-export GOPATH="~/project/golang"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:/home/btb/project/golang/bin"
+export GOPATH="/home/btb/project/golang"
 
 
 # ssh
@@ -77,15 +77,31 @@ function set-mtu() {
 
   if [[ $MTU != "1200" ]]; then
     print "Setting MTU to 1200..."
-    sudo li ip set mtu 1200 dev wlan0
+    sudo ip li set mtu 1200 dev wlan0
     print $(ip li | grep wlan0 | cut -d ' ' -f 5)
   fi
 
 }
 if (( $+commands[ssh] )) && [[ -d ~/.ssh/config.d/ ]]; then
-  set-mtu
     compile-ssh-config
 fi
+
+function vpn() {
+echo Did you mean vpn-sg or vpn-sf?
+}
+
+function vpn-sg() {
+/home/btb/project/sshuttle/sshuttle --dns -r vpn1 0/0
+}
+
+function vpn-sf() {
+/home/btb/project/sshuttle/sshuttle --dns -r vpn2 0/0
+}
+
+function vpn-sv() {
+/home/btb/project/sshuttle/sshuttle --dns -r vpn-sv 0/0
+}
+
 
 # The next line updates PATH for the Google Cloud SDK.
 source '/home/btb/google-cloud-sdk/path.zsh.inc'
