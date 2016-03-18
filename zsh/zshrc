@@ -1,7 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 export DEFAULT_HOST="dude"
-export LSCOLORS="dxfxcxdxbxegedabagacad" #set dir color=yellow
+# export LSCOLORS="dxfxcxdxbxegedabagacad" #set dir color=yellow
+export TERM="xterm-256color"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -91,15 +92,23 @@ echo Did you mean vpn-sg or vpn-sf?
 }
 
 function vpn-sg() {
-/home/btb/project/sshuttle/sshuttle --dns -r vpn1 0/0
+/home/btb/project/sshuttle/sshuttle --dns --pidfile=/tmp/sshuttle.pid --daemon -r vpn1 0/0
 }
 
 function vpn-sf() {
-/home/btb/project/sshuttle/sshuttle --dns -r vpn2 0/0
+/home/btb/project/sshuttle/sshuttle --dns --pidfile=/tmp/sshuttle.pid --daemon -r vpn2 0/0
 }
 
 function vpn-sv() {
-/home/btb/project/sshuttle/sshuttle --dns -r vpn-sv 0/0
+/home/btb/project/sshuttle/sshuttle --dns --pidfile=/tmp/sshuttle.pid --daemon -r vpn-sv 0/0
+}
+
+function vpn-stop() {
+  kill $(cat /tmp/sshuttle.pid) && echo "Disconnected"
+}
+
+function vpn-kill() {
+  kill $(cat /tmp/sshuttle.pid) && echo "Disconnected"
 }
 
 
