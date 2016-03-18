@@ -1,9 +1,0 @@
-VimClojure
-minibufexpl.vim
-nerdtree
-vim-airline
-vim-coffee-script
-vim-fugitive
-vim-gocode
-vim-golang
-vimtodo

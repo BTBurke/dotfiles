@@ -2,8 +2,6 @@
 export ZSH=$HOME/.oh-my-zsh
 export DEFAULT_HOST=$(hostname -f)
 export LSCOLORS="dxfxcxdxbxegedabagacad" #set dir color=yellow
-export DEFAULT_HOST="dude"
-# export LSCOLORS="dxfxcxdxbxegedabagacad" #set dir color=yellow
 export TERM="xterm-256color"
 
 # Set name of the theme to load.
@@ -83,8 +81,8 @@ function set-mtu() {
     sudo ip li set mtu 1200 dev wlan0
     print $(ip li | grep wlan0 | cut -d ' ' -f 5)
   fi
-
 }
+
 if (( $+commands[ssh] )) && [[ -d ~/.ssh/config.d/ ]]; then
     compile-ssh-config
 fi
@@ -93,7 +91,7 @@ function vpn() {
 echo Did you mean vpn-sg/vpn-sf/vpn-sv?
 }
 
-function vpn-sg() {}
+function vpn-sg() {
 sshuttle --daemon --pidfile=/tmp/sshuttle.pid --dns -r vpn1 0/0
 }
 

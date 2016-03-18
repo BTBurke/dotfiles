@@ -15,6 +15,16 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'tpope/vim-surround'
+Bundle 'cespare/vim-toml'
+Bundle 'elzr/vim-json'
+Plugin 'mxw/vim-jsx'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mhinz/vim-sayonara'
+Plugin 'majutsushi/tagbar'
+Plugin 'SirVer/ultisnips'
+
 
 call vundle#end()            " required
 syntax on
@@ -24,8 +34,9 @@ filetype plugin indent on
 :retab
 :set shiftwidth=4
 :set number
-:set guioptions +=m
-:set guioptions -=T
+:set guioptions -=m " no menu in gvim
+:set guioptions -=T " no icon bar in gvim
+:set guioptions -=s " no scroll bar in gvim
 :set guifont=Roboto\ Mono\ for\ Powerline\ 11
 :set noswapfile
 :set noerrorbells
@@ -51,13 +62,27 @@ filetype plugin indent on
 :set ttyscroll=3
 :set lazyredraw
 
+" Leader
+let mapleader=","
 
+nmap <C-p> <plug>NERDCommenterInvert
 
 " Navigation commands
 nmap <C-j> :bnext<cr>
-imap <C-j> :bnext<cr>
+imap <C-j> <esc>:bnext<cr>
 nmap <C-k> :bprev<cr>
-imap <C-k> :bprev<cr>
+imap <C-k> <esc>:bprev<cr>
+
+" Enable Ctrl+v to paste from system clipboard
+nmap <C-v> :set paste<cr>"*p:set nopaste<cr>
+imap <C-v> <esc>:set paste<cr>"*p:set nopaste<cr>i
+
+" noob mode save
+imap <C-s> <esc>:w<cr>
+nmap <C-s> :w<cr>
+
+" Switch to normal with jk
+imap jk <Esc>
 
 " <F7> to re-indent the whole file
 map <F7> mzgg=G`z<CR>
@@ -67,7 +92,7 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
 
 set background=dark
-colorscheme kafka
+colorscheme Kafka
 :let g:airline_theme='base16_codeschool'
 
 set omnifunc=syntaxcomplete#Complete
@@ -107,4 +132,33 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
+" ===========================================================
+" JSX syntax highlighting
+" ===========================================================
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+let g:syntastic_javascript_checkers = ['eslint']
+
+" ===========================================================
+" Tagbar viewer
+" ===========================================================
+nmap <C-d> :TagbarToggle<CR>
+
+" ===========================================================
+" Sayonara
+" ===========================================================
+" smart buffer close, gets rid of shit without errors in smart way
+nmap <C-q> :Sayonara<cr>
+
+" ===========================================================
+" UltiSnips
+" ===========================================================
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsListSnippets="<c-tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-n>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-b>"
