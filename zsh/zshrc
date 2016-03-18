@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-export DEFAULT_HOST="dude"
+export DEFAULT_HOST=$(hostname -f)
 export LSCOLORS="dxfxcxdxbxegedabagacad" #set dir color=yellow
 
 # Set name of the theme to load.
@@ -56,8 +56,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:/home/btb/project/golang/bin"
-export GOPATH="/home/btb/project/golang"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:$HOME/project/golang/bin"
+export GOPATH="$HOME/project/golang"
 
 
 # ssh
@@ -87,24 +87,27 @@ if (( $+commands[ssh] )) && [[ -d ~/.ssh/config.d/ ]]; then
 fi
 
 function vpn() {
-echo Did you mean vpn-sg or vpn-sf?
+echo Did you mean vpn-sg/vpn-sf/vpn-sv?
 }
 
 function vpn-sg() {
-/home/btb/project/sshuttle/sshuttle --dns -r vpn1 0/0
+sshuttle --daemon --pidfile=/tmp/sshuttle.pid --dns -r vpn1 0/0
 }
 
 function vpn-sf() {
-/home/btb/project/sshuttle/sshuttle --dns -r vpn2 0/0
+sshuttle --daemon --pidfile=/tmp/sshuttle.pid --dns -r vpn2 0/0
 }
 
 function vpn-sv() {
-/home/btb/project/sshuttle/sshuttle --dns -r vpn-sv 0/0
+sshuttle --daemon --pidfile=/tmp/sshuttle.pid --dns -r vpn-sv 0/0
 }
 
+function vpn-kill() {
+kill -9 $(cat /tmp/sshuttle.pid) && rm -rf /tmp/sshuttle.pid && echo "Disconnected"
+}
 
 # The next line updates PATH for the Google Cloud SDK.
-source '/home/btb/google-cloud-sdk/path.zsh.inc'
+#source '/home/btb/google-cloud-sdk/path.zsh.inc'
 
 # The next line enables shell command completion for gcloud.
-source '/home/btb/google-cloud-sdk/completion.zsh.inc'
+#source '/home/btb/google-cloud-sdk/completion.zsh.inc'
