@@ -1,25 +1,110 @@
-filetype off
-call pathogen#infect()
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'fatih/vim-go'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
+
+call vundle#end()            " required
 syntax on
 filetype plugin indent on
 :set expandtab
 :set tabstop=4
 :retab
-:set shiftwidth=4 
+:set shiftwidth=4
+:set number
+:set guioptions +=m
+:set guioptions -=T
+:set guifont=Roboto\ Mono\ for\ Powerline\ 11
+:set noswapfile
+:set noerrorbells
+:set backspace=indent,eol,start
+:set showcmd
+:set showmode
+:set nobackup
+:set splitright
+:set splitbelow
+:set encoding=utf-8
+:set autowrite
+:set autoread
+:set hidden
+:set laststatus=2
+:set fileformats=unix,dos,mac
+:set noshowmode
+:set incsearch
+:set hlsearch
+:set ignorecase
+:set smartcase
+:set ttyfast
+:set ttymouse=xterm2
+:set ttyscroll=3
+:set lazyredraw
 
-map <C-n> :NERDTreeToggle<CR>
 
 
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
+" Navigation commands
+nmap <C-j> :bnext<cr>
+imap <C-j> :bnext<cr>
+nmap <C-k> :bprev<cr>
+imap <C-k> :bprev<cr>
 
 " <F7> to re-indent the whole file
 map <F7> mzgg=G`z<CR>
 
 " Map the W to w on write for accidental shift
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+cnoreabbrev <expr> Q ((getcmdtype() is# ':' && getcmdline() is# 'Q')?('q'):('Q'))
 
-colorscheme molokai
+set background=dark
+colorscheme kafka
+:let g:airline_theme='base16_codeschool'
+
 set omnifunc=syntaxcomplete#Complete
+" speed up syntax highlighting
+set nocursorcolumn
+set nocursorline
+
+syntax sync minlines=256
+set synmaxcol=300
+set re=1
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+" set t_Co=256
+
+
+" ===========================================================
+" Airline configuration
+" ===========================================================
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+set laststatus=2
+
+" ===========================================================
+" NerdTree configuration
+" ===========================================================
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+" ===========================================================
+" Vim-go configuration 
+" ===========================================================
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
