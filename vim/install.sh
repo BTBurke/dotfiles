@@ -5,11 +5,13 @@ git clone https://github.com/powerline/fonts /tmp/fonts
 /tmp/fonts/install.sh
 rm -rf /tmp/fonts
 
-echo "Installing color themes..."
+echo "Installing color themes and snippets..."
 mkdir -p ~/.vim
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.vim/colors
+mkdir -p ~/.vim/UltiSnips
 cp colors/* ~/.vim/colors/
+cp UltiSnips/* ~/.vim/UltiSnips/
 
 echo "Installing vundle to manage plugins..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
