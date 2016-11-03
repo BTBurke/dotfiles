@@ -15,7 +15,6 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Shougo/neocomplete.vim'
 Plugin 'tpope/vim-surround'
 Bundle 'cespare/vim-toml'
 Bundle 'elzr/vim-json'
@@ -24,15 +23,19 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'mhinz/vim-sayonara'
 Plugin 'majutsushi/tagbar'
 Plugin 'SirVer/ultisnips'
-
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'pangloss/vim-javascript'
 
 call vundle#end()            " required
 syntax on
 filetype plugin indent on
 :set expandtab
-:set tabstop=4
+:set tabstop=2
+:set softtabstop=2
 :retab
-:set shiftwidth=4
+:set shiftwidth=2
 :set number
 :set guioptions -=m " no menu in gvim
 :set guioptions -=T " no icon bar in gvim
@@ -106,6 +109,19 @@ set re=1
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " set t_Co=256
 
+" ===========================================================
+" Rainbow parens config
+" ===========================================================
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadBraces
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadChevrons
+
+" ===========================================================
+" Pangloss/Javascript
+" ===========================================================
+let g:javascript_plugin_flow = 1
 
 " ===========================================================
 " Airline configuration
@@ -153,6 +169,15 @@ nmap <C-d> :TagbarToggle<CR>
 " ===========================================================
 " smart buffer close, gets rid of shit without errors in smart way
 nmap <C-q> :Sayonara<cr>
+
+
+" ===========================================================
+" Syntastic
+" ===========================================================
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " ===========================================================
 " UltiSnips
