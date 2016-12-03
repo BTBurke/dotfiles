@@ -27,7 +27,9 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
-
+Plugin 'flowtype/vim-flow'
+Plugin 'ensime/ensime-vim'
+Plugin 'derekwyatt/vim-scala'
 call vundle#end()            " required
 syntax on
 filetype plugin indent on
@@ -187,3 +189,10 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 "let g:UltiSnipsListSnippets="<c-tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-n>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+" ===========================================================
+" ensime
+" ===========================================================
+autocmd BufWritePost *.scala silent :EnTypeCheck
+:let maplocalleader = "\\"
+nnoremap <localleader>t :EnTypeCheck<CR>
