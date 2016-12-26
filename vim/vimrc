@@ -30,6 +30,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'flowtype/vim-flow'
 Plugin 'ensime/ensime-vim'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'leafgarland/typescript-vim'
 call vundle#end()            " required
 syntax on
 filetype plugin indent on
