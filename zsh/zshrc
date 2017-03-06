@@ -51,14 +51,18 @@ ZSH_THEME="burke"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow atom autojump forklift)
+plugins=(autojump)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:$HOME/project/golang/bin:/usr/local/node-v4.4.7-linux-x64/bin"
-export GOPATH="$HOME/project/golang"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:$HOME/projects/golang/bin:/usr/local/node-v6.9.4-linux-x64/bin"
+export GOPATH="$HOME/projects/golang"
+
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+
 
 
 # ssh
