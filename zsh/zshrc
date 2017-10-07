@@ -57,7 +57,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:$HOME/projects/golang/bin:/usr/local/node-v6.9.4-linux-x64/bin"
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:$HOME/projects/golang/bin:/usr/local/lib/node/bin"
 export GOPATH="$HOME/projects/golang"
 
 export ANDROID_HOME="$HOME/Android/Sdk"
@@ -109,6 +109,17 @@ sshuttle --daemon --pidfile=/tmp/sshuttle.pid --dns -r vpn-sv 0/0
 
 function vpn-kill() {
 kill -9 $(cat /tmp/sshuttle.pid) && rm -rf /tmp/sshuttle.pid && echo "Disconnected"
+}
+
+function upgrade-go() {
+    LATEST=$(curl -s https://golang.org/dl/ | egrep -o '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
+    CURRENT=$(go version | egrep -o '[0-9]+\.[0-9]+\.[0-9]+')
+    if [[ $LATEST != $CURRENT ]]; then
+        echo "Upgrading from $CURRENT to $LATEST..."
+        wget --quiet https://storage.googleapis.com/golang/go$LATEST.linux-amd64.tar.gz && sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go$LATEST.linux-amd64.tar.gz && rm go$LATEST.linux-amd64.tar.gz && echo "Go version $LATEST installed successfully."
+    else
+        echo "Version $CURRENT is the latest version of Go"
+    fi
 }
 
 # The next line updates PATH for the Google Cloud SDK.
