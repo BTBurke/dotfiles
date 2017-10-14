@@ -56,12 +56,17 @@ plugins=(autojump)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+#if [[ MONOENV != true ]]
+#then
+#  export GOPATH="$HOME/projects/golang"
+#else
+#  export GOPATH="$(dirname $(pwd))"
+#fi
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:$HOME/projects/golang/bin:/usr/local/lib/node/bin"
-export GOPATH="$HOME/projects/golang"
+#export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:$GOPATH/bin:/usr/local/lib/node/bin"
 
-export ANDROID_HOME="$HOME/Android/Sdk"
-export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
+#export ANDROID_HOME="$HOME/Android/Sdk"
+#export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools"
 
 
 
@@ -119,6 +124,40 @@ function upgrade-go() {
         wget --quiet https://storage.googleapis.com/golang/go$LATEST.linux-amd64.tar.gz && sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go$LATEST.linux-amd64.tar.gz && rm go$LATEST.linux-amd64.tar.gz && echo "Go version $LATEST installed successfully."
     else
         echo "Version $CURRENT is the latest version of Go"
+    fi
+}
+
+function go-monorepo() {
+    # check if this looks like a monorepo with a src directory
+    if [[ -d src || $(pwd) =~ "src$" ]]; then
+        
+        # see where we are in dir hierarchy to set root of GOPATH appropriately
+        if [[ -d src ]]; then 
+            BASE=$(pwd)
+        else
+            BASE=$(dirname $(pwd))
+        fi
+
+        # check if there was a bad teardown before and reset
+        if [[ $GOPATH == $BASE ]]; then
+            export MONOENV=false
+            source ~/.zshenv 
+        fi
+        
+        # if a bad teardown before, blow it away and restart
+        if [[ -d $BASE/bin ]]; then
+            chmod -R +w $BASE/bin && rm -rf $BASE/bin
+        fi
+        if [[ -d $BASE/pkg ]]; then
+            chmod -R +w $BASE/pkg && rm -rf $BASE/pkg
+        fi
+
+        # copy existing installed packages in read-only mode, then start new shell with new GOPATH
+        mkdir -p $BASE/bin $BASE/pkg && cp -r $GOPATH/bin $BASE && cp -r $GOPATH/pkg $BASE && chmod -R -w $BASE/bin $BASE/pkg
+        echo "Setting up monorepo env with GOPATH=$BASE"
+        MONOENV=true zsh && chmod -R +w $BASE/bin $BASE/pkg && rm -rf $BASE/bin $BASE/pkg && echo "Monorepo tear down.  GOPATH=$GOPATH" || echo "Something went wrong.  Check GOPATH." && export MONOENV=false && source ~/.zshenv
+    else
+        echo "This doesnt appear to be a valid monorepo.  Run this command from the root of the monorepo."
     fi
 }
 

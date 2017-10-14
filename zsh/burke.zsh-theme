@@ -10,10 +10,10 @@ Y=$fg_no_bold[yellow]
 B=$fg_no_bold[blue]
 RESET=$reset_color
 
-if [ $(hostname) = "$DEFAULT_HOST" ]; then
+if [[ $MONOENV != true ]]; then
     PROMPTCOLOR="" PREFIX="✫";
 else
-    PROMPTCOLOR="%{$R%}" PREFIX="%F{white}%B⥣⥥ %f%F{red}$(whoami)@%M %b%f";
+    PROMPTCOLOR="%{$R%}" PREFIX="%F{white}%B✫ %f%F{red}(M) %b%f";
 fi
 
 local return_code="%(?..%{$R%}%? ↵%{$RESET%})"
