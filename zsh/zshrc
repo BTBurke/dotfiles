@@ -162,7 +162,7 @@ function go-monorepo() {
         # copy existing installed packages in read-only mode, then start new shell with new GOPATH
         mkdir -p $BASE/bin $BASE/pkg && cp -r $GOPATH/bin $BASE && cp -r $GOPATH/pkg $BASE && chmod -R -w $BASE/bin $BASE/pkg
         echo "Setting up monorepo env with GOPATH=$BASE"
-        MONOENV=true zsh && chmod -R +w $BASE/bin $BASE/pkg && rm -rf $BASE/bin $BASE/pkg && echo "Monorepo tear down.  GOPATH=$GOPATH" || echo "Something went wrong.  Check GOPATH." && export MONOENV=false && source ~/.zshenv
+        MONOENV=true zsh && if [[ -d $BASE/bin ]]; then chmod -R +w $BASE/bin $BASE/pkg && rm -rf $BASE/bin $BASE/pkg; fi && echo "Monorepo tear down.  GOPATH=$GOPATH" || echo "Something went wrong.  Check GOPATH." && export MONOENV=false && source ~/.zshenv
     else
         echo "This doesnt appear to be a valid monorepo.  Run this command from the root of the monorepo."
     fi
