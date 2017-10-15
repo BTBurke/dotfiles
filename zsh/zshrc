@@ -58,6 +58,16 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 # See .zshenv for environment
 
+# alias git to hub when the github CLI is installed
+if [[ -f $(which hub) ]]; then
+    eval $(hub alias -s)
+fi
+
+# load completions
+if [[ -d ~/.zsh/completions ]]; then
+    fpath=(~/.zsh/completions $fpath) 
+    autoload -U compinit && compinit
+fi
 
 # ssh
 function compile-ssh-config() {
@@ -183,6 +193,9 @@ function go-tools-update() {
         echo "Proto compiler version $PROTOCURRENT is the latest"
     fi
     go get -u github.com/golang/protobuf/protoc-gen-go
+
+    echo "Updating hub..."
+    go get -u github.com/github/hub/
 
     echo "Updating dep..."
     go get -u github.com/golang/dep/cmd/dep

@@ -8,8 +8,6 @@ else
         else
             export GOPATH=$(dirname $(pwd))
         fi
-  else
-    echo "Monorepo is set but this doesn't appear to be at the root of the repo.  Refusing to set a new GOPATH."
   fi
 fi
 
