@@ -126,6 +126,17 @@ function upgrade-go() {
     fi
 }
 
+function upgrade-node() {
+    LATEST=$(curl -sL https://nodejs.org/en/download | egrep -o '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
+    CURRENT=$(node --version | egrep -o '[0-9]+\.[0-9]+\.[0-9]+')
+    if [[ $LATEST != $CURRENT ]]; then
+        echo "Upgrading from $CURRENT to $LATEST..."
+        wget --quiet https://nodejs.org/dist/v$LATEST/node-v$LATEST-linux-x64.tar.xz && sudo rm -rf /usr/local/lib/node/ && sudo mkdir -p /usr/local/lib/node && sudo tar -C /usr/local/lib/node --strip-components=1 -xf node-v$LATEST-linux-x64.tar.xz && rm node-v$LATEST-linux-x64.tar.xz && echo "Node version $LATEST installed successfully."
+    else
+        echo "Version $CURRENT is the latest version of Go"
+    fi
+}
+
 function go-monorepo() {
     # check if already in monorepo
     if [[ $MONOENV == true ]]; then 
