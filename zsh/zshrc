@@ -160,7 +160,7 @@ function go-monorepo() {
         go-tools-update prompt
 
         # copy existing installed packages in read-only mode, then start new shell with new GOPATH
-        mkdir -p $BASE/bin $BASE/pkg && cp -r $GOPATH/bin $BASE && cp -r $GOPATH/pkg $BASE && chmod -R -w $BASE/bin $BASE/pkg
+        mkdir -p $BASE/bin $BASE/pkg && cp -r $GOPATH/bin $BASE && cp -r $GOPATH/pkg $BASE && chmod -R -w $BASE/bin 
         echo "Setting up monorepo env with GOPATH=$BASE"
         MONOENV=true zsh && if [[ -d $BASE/bin ]]; then chmod -R +w $BASE/bin $BASE/pkg && rm -rf $BASE/bin $BASE/pkg; fi && echo "Monorepo tear down.  GOPATH=$GOPATH" || echo "Something went wrong.  Check GOPATH." && export MONOENV=false && source ~/.zshenv
     else
