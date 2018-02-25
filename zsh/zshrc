@@ -10,6 +10,13 @@ export TERM="xterm-256color"
 # time that oh-my-zsh is loaded.
 ZSH_THEME="burke"
 
+# add bash emulation to set up snaps
+emulate sh -c 'source /etc/profile'
+
+function snap-desktop-shortcuts() {
+  cp /var/lib/snapd/desktop/applications/*.desktop ~/.local/share/applications
+}
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -116,11 +123,11 @@ kill -9 $(cat /tmp/sshuttle.pid) && rm -rf /tmp/sshuttle.pid && echo "Disconnect
 }
 
 function upgrade-go() {
-    LATEST=$(curl -s https://golang.org/dl/ | egrep -o '[0-9]+\.[0-9]+\.[0-9]+' | head -n 1)
+    LATEST=$(curl -s https://golang.org/dl/ | egrep -o 'go[0-9]\.[0-9]+(\.[0-9]+)?' | head -n 1)
     CURRENT=$(go version | egrep -o '[0-9]+\.[0-9]+\.[0-9]+')
     if [[ $LATEST != $CURRENT ]]; then
         echo "Upgrading from $CURRENT to $LATEST..."
-        wget --quiet https://storage.googleapis.com/golang/go$LATEST.linux-amd64.tar.gz && sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go$LATEST.linux-amd64.tar.gz && rm go$LATEST.linux-amd64.tar.gz && echo "Go version $LATEST installed successfully."
+        wget --quiet https://storage.googleapis.com/golang/$LATEST.linux-amd64.tar.gz && sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf $LATEST.linux-amd64.tar.gz && rm $LATEST.linux-amd64.tar.gz && echo "Go version $LATEST installed successfully."
     else
         echo "Version $CURRENT is the latest version of Go"
     fi
