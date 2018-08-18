@@ -225,7 +225,7 @@ function go-tools-update() {
     go get -u \
     github.com/ramya-rao-a/go-outline \
     github.com/acroca/go-symbols \
-    github.com/nsf/gocode \
+    github.com/visualfc/gocode \
     github.com/rogpeppe/godef \
     golang.org/x/tools/cmd/godoc \
     github.com/zmb3/gogetdoc \
