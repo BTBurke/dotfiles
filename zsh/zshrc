@@ -215,11 +215,8 @@ function go-tools-update() {
     echo "Updating hub..."
     go get -u github.com/github/hub/
 
-    echo "Updating dep..."
-    go get -u github.com/golang/dep/cmd/dep
-
-    echo "Updating go-bindata..."
-    go get -u github.com/jteeuwen/go-bindata/...
+    echo "Updating packr..."
+    go get -u github.com/gobuffalo/packr/...
 
     echo "Updating megacheck..."
     go get -u honnef.co/go/tools/cmd/megacheck

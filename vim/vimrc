@@ -28,8 +28,6 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
 Plugin 'flowtype/vim-flow'
-Plugin 'ensime/ensime-vim'
-Plugin 'derekwyatt/vim-scala'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mhartington/oceanic-next'
 call vundle#end()            " required
