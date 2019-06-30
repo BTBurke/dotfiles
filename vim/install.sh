@@ -16,6 +16,10 @@ cp UltiSnips/* ~/.vim/UltiSnips/
 echo "Installing vundle to manage plugins..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+echo "Installing plug for another option..."
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+
 echo "Symlinking .vimrc to dotfiles/vim/vimrc..."
 rm ~/.vimrc
 ln -s $(pwd)/vimrc ~/.vimrc

@@ -17,6 +17,23 @@ function snap-desktop-shortcuts() {
   cp /var/lib/snapd/desktop/applications/*.desktop ~/.local/share/applications
 }
 
+function fix-network() {
+  sudo route add -net 0.0.0.0 gw 10.0.0.1 wlp3s0
+}
+
+function vpn {
+  if [ "$1" = "cities" ]; then
+    nordvpn cities United_States
+    return 0
+  fi
+
+  if [ "$1" = "disc" ] || [ "$1" = "kill" ] || [ "$1" = "disconnect" ]; then
+    nordvpn disconnect
+  else
+    nordvpn connect United_States $1
+  fi
+}
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -102,25 +119,7 @@ if (( $+commands[ssh] )) && [[ -d ~/.ssh/config.d/ ]]; then
     compile-ssh-config
 fi
 
-function vpn() {
-echo Did you mean vpn-sg/vpn-sf/vpn-sv?
-}
 
-function vpn-sg() {
-sshuttle --daemon --pidfile=/tmp/sshuttle.pid --dns -r vpn1 0/0
-}
-
-function vpn-sf() {
-sshuttle --daemon --pidfile=/tmp/sshuttle.pid --dns -r vpn2 0/0
-}
-
-function vpn-sv() {
-sshuttle --daemon --pidfile=/tmp/sshuttle.pid --dns -r vpn-sv 0/0
-}
-
-function vpn-kill() {
-kill -9 $(cat /tmp/sshuttle.pid) && rm -rf /tmp/sshuttle.pid && echo "Disconnected"
-}
 
 function upgrade-go() {
     LATEST=$(curl -s https://golang.org/dl/ | egrep -o 'go[0-9]\.[0-9]+(\.[0-9]+)?' | head -n 1)

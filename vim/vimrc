@@ -25,12 +25,16 @@ Plugin 'majutsushi/tagbar'
 Plugin 'SirVer/ultisnips'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript'
 Plugin 'flowtype/vim-flow'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mhartington/oceanic-next'
 call vundle#end()            " required
+
+call plug#begin('~/.vim/plugged')
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+call plug#end()
+
 syntax on
 filetype plugin indent on
 :set expandtab
