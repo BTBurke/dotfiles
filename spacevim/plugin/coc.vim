@@ -20,7 +20,6 @@ call coc#config('coc.preferences', {
 let s:coc_extensions = [
 			\ 'coc-dictionary',
 			\ 'coc-json',
-			\ 'coc-ultisnips',
 			\ 'coc-tag',
 			\]
 
