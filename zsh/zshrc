@@ -21,6 +21,10 @@ function fix-network() {
   sudo route add -net 0.0.0.0 gw 10.0.0.1 wlp3s0
 }
 
+function fix-spotify() {
+  sudo sed -i --follow-symlinks 's/spotify %U$/spotify --force-device-scale-factor=2.0 %U/g' /var/lib/snapd/desktop/applications/spotify_spotify.desktop
+}
+
 function vpn {
   if [ "$1" = "cities" ]; then
     nordvpn cities United_States
@@ -119,6 +123,10 @@ if (( $+commands[ssh] )) && [[ -d ~/.ssh/config.d/ ]]; then
     compile-ssh-config
 fi
 
+function mux() {
+  gnome-terminal --window --full-screen --hide-menubar --title=nvim -x sh -c "!!; tmuxinator $1"
+  exit
+}
 
 
 function upgrade-go() {
