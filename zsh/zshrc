@@ -61,6 +61,8 @@ function vpn() {
     echo "vpn up <city> | down | list"
     return 0
   fi
+
+  echo "unknown command $1.  Usage:\nvpn up <city> | down | list"
 }
 
 # Example aliases
