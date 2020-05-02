@@ -152,8 +152,8 @@ fi
 
 function mux() {
   #gnome-terminal --window --full-screen --hide-menubar --title=nvim -x sh -c "!!; tmuxinator $1"
-  alacritty --config-file /home/btburke/projects/dotfiles/alacritty/tmux.yml -e sh -c "tmuxinator $1"
-  exit
+  exec alacritty --config-file /home/btburke/projects/dotfiles/alacritty/tmux.yml -e sh -c "tmuxinator $1"&!
+  exit 
 }
 
 
