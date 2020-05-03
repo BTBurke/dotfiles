@@ -22,6 +22,10 @@ battery_status=$(upower --show-info $(upower --enumerate | grep 'BAT') | egrep "
 vpn_name=$(nmcli -t | grep VPN | head -n 1 | cut -d ' ' -f 1)
 wifi_up=$(nmcli -t | grep "connected to")
 
+bright_time=$(date --date="$(stat ~/.config/sway/bright.txt | grep Modify | cut -d ' ' -f 2-5)" '+%s')
+bright_elapsed=$(($bright_time - $(date '+%s')))
+brightness_value=$(cat ~/.config/sway/bright.txt | cut -d ',' -f 4) 
+
 # Audio and multimedia
 audio_volume=$(pamixer --get-volume)
 #audio_volume=$(pamixer --sink `pactl list sinks short | grep RUNNING | awk '{print $1}'` --get-volume)
@@ -75,5 +79,12 @@ else
   wifi_active='⇅'
 fi
 
-echo "$vpn_active $vpn_name   $wifi_active   $audio_active$audio_volume%   $battery_pluggedin$battery_charge   $date_and_week $current_time   "
+if [ $bright_elapsed -lt -5 ]
+then
+  brightness=''
+else
+  brightness="☀ $brightness_value"
+fi
+
+echo "$brightness   $vpn_active $vpn_name   $wifi_active   $audio_active$audio_volume%   $battery_pluggedin$battery_charge   $date_and_week $current_time   "
 
