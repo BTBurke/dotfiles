@@ -220,10 +220,12 @@ bar {
 input "1739:30383:DLL075B:01_06CB:76AF_Touchpad" {
   tap enabled
   natural_scroll enabled
+  click_method clickfinger
 }
 
-# launch browser
+# launch apps
 bindsym $mod+f exec firefox-developer-edition
+bindsym $mod+shift+s exec spotify
 
 # set wallpaper
 output eDP-1 bg ~/.wallpapers/aurora.jpg fill
