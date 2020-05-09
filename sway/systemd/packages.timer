@@ -1,0 +1,10 @@
+[Unit]
+Description=Checks for package updates
+
+[Timer]
+OnBootSet=5min
+OnUnitActiveSec=15min
+Unit=packages.service
+
+[Install]
+WantedBy=default.target

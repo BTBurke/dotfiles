@@ -26,6 +26,8 @@ bright_time=$(date --date="$(stat ~/.config/sway/bright.txt | grep Modify | cut 
 bright_elapsed=$(($bright_time - $(date '+%s')))
 brightness_value=$(cat ~/.config/sway/bright.txt | cut -d ',' -f 4) 
 
+packages=$(cat ~/.config/sway/packages.txt 2>/dev/null | wc -l)
+
 # Audio and multimedia
 audio_volume=$(pamixer --get-volume)
 #audio_volume=$(pamixer --sink `pactl list sinks short | grep RUNNING | awk '{print $1}'` --get-volume)
@@ -86,5 +88,12 @@ else
   brightness="☀ $brightness_value"
 fi
 
-echo "$brightness   $vpn_active $vpn_name   $wifi_active   $audio_active$audio_volume%   $battery_pluggedin$battery_charge   $date_and_week $current_time   "
+if [ $packages -gt 0 ]
+then
+  packages_prompt="$packages updates"
+else
+  packages_prompt=''
+fi
+
+echo "$brightness   $packages_prompt   $vpn_active $vpn_name   $wifi_active   $audio_active$audio_volume%   $battery_pluggedin$battery_charge   $date_and_week $current_time   "
 

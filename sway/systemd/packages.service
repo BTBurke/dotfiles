@@ -1,0 +1,9 @@
+[Unit]
+Description=Checks for package updates
+
+[Service]
+Type=simple
+ExecStart=/home/btburke/.config/sway/scripts/packages.sh
+
+[Install]
+WantedBy=default.target
