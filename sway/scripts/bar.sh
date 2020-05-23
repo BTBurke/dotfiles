@@ -21,6 +21,11 @@ battery_status=$(upower --show-info $(upower --enumerate | grep 'BAT') | egrep "
 
 vpn_name=$(nmcli -t | grep VPN | head -n 1 | cut -d ' ' -f 1)
 wifi_up=$(nmcli -t | grep "connected to")
+nvpn_up=$(nordvpn status | grep "Connected")
+if [ -n "$nvpn_up" ]
+then
+  vpn_name=$(nordvpn status | grep "City" | cut -d ' ' -f 2-)
+fi
 
 bright_time=$(date --date="$(stat ~/.config/sway/bright.txt | grep Modify | cut -d ' ' -f 2-5)" '+%s')
 bright_elapsed=$(($bright_time - $(date '+%s')))
@@ -94,6 +99,8 @@ then
 else
   packages_prompt=''
 fi
+
+
 
 echo "$brightness   $packages_prompt   $vpn_active $vpn_name   $wifi_active   $audio_active$audio_volume%   $battery_pluggedin$battery_charge   $date_and_week $current_time   "
 

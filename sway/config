@@ -70,7 +70,8 @@ exec swayidle -w \
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec j4-dmenu-desktop --dmenu='bemenu -i -l 3 -p "Search: " --nb "#142850" --tb "#142850" --fb "#142850" --sb "#142850" --hb "#142850" --sf "#dae1e7" --hf "00909e" --hf "#e43f5a" --fn "pango:DejaVu Sans Mono 10"' --term='alacritty'
+    #bindsym $mod+d exec j4-dmenu-desktop --dmenu='bemenu -i -l 3 -p "Search: " --nb "#142850" --tb "#142850" --fb "#142850" --sb "#142850" --hb "#142850" --sf "#dae1e7" --hf "00909e" --hf "#e43f5a" --fn "pango:DejaVu Sans Mono 10"' --term='alacritty'
+    bindsym $mod+d exec j4-dmenu-desktop
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -228,7 +229,7 @@ bindsym $mod+f exec firefox-developer-edition
 bindsym $mod+shift+s exec spotify
 
 # set wallpaper
-output eDP-1 bg ~/.wallpapers/aurora.jpg fill
+output eDP-1 bg ~/.wallpapers/current.jpg stretch
 
 # volume and track keys
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%

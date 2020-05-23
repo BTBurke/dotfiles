@@ -6,9 +6,9 @@ Add systemd files to ~/.config/systemd/user then
 - systemctl --user start packages.timer
 
 Also needs AUR packages:
-- bemenu
 - j4-dmenu-desktop
 - pactl
 - brightnessctl
 - playerctl
+- nordvpn-bin
 
