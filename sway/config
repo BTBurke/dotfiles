@@ -71,7 +71,8 @@ exec swayidle -w \
 
     # Start your launcher
     #bindsym $mod+d exec j4-dmenu-desktop --dmenu='bemenu -i -l 3 -p "Search: " --nb "#142850" --tb "#142850" --fb "#142850" --sb "#142850" --hb "#142850" --sf "#dae1e7" --hf "00909e" --hf "#e43f5a" --fn "pango:DejaVu Sans Mono 10"' --term='alacritty'
-    bindsym $mod+d exec j4-dmenu-desktop
+    #bindsym $mod+d exec j4-dmenu-desktop
+    bindsym $mod+d exec ulauncher-toggle
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -242,7 +243,7 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-
+default_border none
 
 
 include /etc/sway/config.d/*

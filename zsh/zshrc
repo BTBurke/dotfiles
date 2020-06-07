@@ -22,7 +22,7 @@ function fix-network() {
 }
 
 function fix-spotify() {
-  sudo sed -i --follow-symlinks 's/spotify %U$/spotify --force-device-scale-factor=2.0 %U/g' /var/lib/snapd/desktop/applications/spotify_spotify.desktop
+  sudo sed -i --follow-symlinks 's/spotify %U$/spotify --force-device-scale-factor=2.0 %U/g' /usr/share/applications/spotify.desktop
 }
 function fix-zoom() {
   sudo sed -i --follow-symlinks 's/\/usr\/bin\/zoom %U$/env QT_DEVICE_PIXEL_RATIO=2 \/usr\/bin\/zoom %U/g' /usr/share/applications/Zoom.desktop
