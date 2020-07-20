@@ -27,6 +27,10 @@ function fix-spotify() {
 function fix-zoom() {
   sudo sed -i --follow-symlinks 's/\/usr\/bin\/zoom %U$/env QT_DEVICE_PIXEL_RATIO=2 \/usr\/bin\/zoom %U/g' /usr/share/applications/Zoom.desktop
 }
+
+function fix-flutter() {
+  sudo chown -R btburke:btburke /opt/flutter
+}
 #function vpn {
 #  if [ "$1" = "cities" ]; then
 #    nordvpn cities United_States
