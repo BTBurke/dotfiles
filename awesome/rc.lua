@@ -18,6 +18,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 vicious = require("vicious")
+local cyclefocus = require('cyclefocus')
+require("collision")()
 
 awful.spawn.with_shell("xinput set-prop \"DLL075B:01 06CB:76AF Touchpad\" 318 1")
 
@@ -51,7 +53,7 @@ end
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
+terminal = "gnome-terminal"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 browser = "firefox-developer-edition"
@@ -187,7 +189,7 @@ vicious.register(batterywidget, vicious.widgets.bat, function (widget, args)
 
 netwidget = wibox.widget.textbox()
 netwidget.width, netwidget.align = 100, "right"
-vicious.register(netwidget, vicious.widgets.wifiiw, " Wifi: ${ssid} ${linp}%  | ", 60, "wlp58s0")
+vicious.register(netwidget, vicious.widgets.wifiiw, " ${ssid} ${linp}%  | ", 60, "wlp58s0")
 
 volwidget = wibox.widget.textbox()
 volwidget.width, volwidget.align = 50, "right"
@@ -203,8 +205,21 @@ cpuwidget:set_color{type = "linear", from = {0, 0}, to = {50, 0},
                     stops = {{0, "#FF5656"}, {0.5, "#88A175"}, {1, "#AECF96"}}}
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
 
+vpnwidget = awful.widget.watch(
+    { awful.util.shell, "-c", "nmcli -t | grep VPN | head -n 1 | cut -d ' ' -f 1" },
+    3,
+    function(widget, stdout)
+      if (string.len(stdout) > 0)
+        then
+          widget:set_text(string.gsub(string.format(" 🗝 %s |", stdout),"\n", ""))
+        else
+          widget:set_text("")
+      end
+    end
+)
+
 awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
+    -- wallpaper
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
@@ -254,6 +269,7 @@ awful.screen.connect_for_each_screen(function(s)
             cpuwidget,
             volwidget,
             batterywidget,
+            vpnwidget,
             netwidget,
             mytextclock,
             s.mylayoutbox,
