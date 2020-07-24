@@ -43,8 +43,17 @@ auto-completion-tab-key-behavior = "smart"
   name = "mhartington/oceanic-next"
   merged = 0
 
+[[custom_plugins]]
+name = 'natebosch/vim-lsc'
+
+[[custom_plugins]]
+name = 'natebosch/vim-lsc-dart'
+
 [[layers]]
 name = 'lang#go'
+
+[[layers]]
+name = 'lang#dart'
 
 [[layers]]
 name = "VersionControl"
