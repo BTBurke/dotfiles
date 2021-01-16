@@ -74,3 +74,8 @@ filetypes = [
 ]
 [layers.override_cmd]
     go = ['gopls']
+
+[[custom_plugins]]
+    repo = "evanleck/vim-svelte"
+    merged = false
+
